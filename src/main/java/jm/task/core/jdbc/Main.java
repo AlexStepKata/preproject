@@ -13,7 +13,7 @@ import static jm.task.core.jdbc.util.Util.getConnection;
 
 public class Main {
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
-//        Class.forName("com.mysql.cj.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
 
         getConnection();
         UserDaoJDBCImpl userDaoJDBC = new UserDaoJDBCImpl();
