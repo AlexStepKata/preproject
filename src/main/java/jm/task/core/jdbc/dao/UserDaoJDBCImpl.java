@@ -10,27 +10,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static jm.task.core.jdbc.util.Util.connection;
-import static jm.task.core.jdbc.util.Util.getConnection;
 
 public class UserDaoJDBCImpl {
 
 
     public void createUsersTable() {
-        try (Statement statement = connection.createStatement()) {
-            statement.executeUpdate("CREATE TABLE Users (" +
-                    "id int auto_increment PRIMARY KEY" +
+        try (Statement statement = connection.createStatement()){
+            statement.executeUpdate("CREATE TABLE IF NOT EXISTS Users (" +
+                    "id int auto_increment PRIMARY KEY," +
                     "name varchar(10) not null," +
                     "lastName varchar(10) not null," +
-                    "age varchar(10) not null," +
+                    "age varchar(10) not null" +
                     ")");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-//        public void dropUsersTable () {
-//
-//        }
+        public void dropUsersTable () {
+            try (Statement statement = connection.createStatement()){
+                statement.executeUpdate("DROP TABLE users");
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
 
 //    public void saveUser(String name, String lastName, byte age) {
 //            try (Statement statement = connection.createStatement()){
@@ -49,18 +52,18 @@ public class UserDaoJDBCImpl {
     public List<User> getAllUsers() {
         List<User> list = new ArrayList<>();
         ResultSet resultSet;
-            try (Statement statement = connection.createStatement()) {
-                resultSet = statement.getResultSet();
-                while (resultSet.next()) {
-                    list.add(new User(
-                            resultSet.getString("name"),
-                            resultSet.getString("lastname"),
-                            (byte) resultSet.getInt("age")));
-                }
-
-            }   catch (SQLException e) {
-                throw new RuntimeException(e);
+        try (Statement statement = connection.createStatement()) {
+            resultSet = statement.getResultSet();
+            while (resultSet.next()) {
+                list.add(new User(
+                        resultSet.getString("name"),
+                        resultSet.getString("lastname"),
+                        (byte) resultSet.getInt("age")));
             }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         return list;
     }
 

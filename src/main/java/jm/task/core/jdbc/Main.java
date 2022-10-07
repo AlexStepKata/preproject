@@ -9,15 +9,19 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-import static jm.task.core.jdbc.util.Util.getConnection;
+
+import static jm.task.core.jdbc.util.Util.connection;
+
 
 public class Main {
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.cj.jdbc.Driver");
+//        Class.forName("com.mysql.cj.jdbc.Driver");
 
-        getConnection();
+        connection = Util.getConnection();
+
         UserDaoJDBCImpl userDaoJDBC = new UserDaoJDBCImpl();
         userDaoJDBC.createUsersTable();
+        userDaoJDBC.dropUsersTable();
 
 
 
