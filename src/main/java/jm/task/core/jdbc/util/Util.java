@@ -9,24 +9,17 @@ import java.sql.Statement;
 public class Util {
     private static final String USERNAME = "root";
     private static final String PASSWORD = "root";
-    private static final String URL = "jdbc:mysql://localhost:3306/mysql";
-    public static Connection connection;
+    private static final String URL = "jdbc:mysql://localhost:3306/Kata";
+
 
     public static Connection getConnection() {
-
+        Connection connection = null;
         try {
-            Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-            if (connection != null) {
-                System.out.println("Connected to the database!");
-                return connection;
-            } else {
-                System.out.println("Failed to make connection!");
-            }
+            connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
         } catch (SQLException e) {
-            System.err.printf("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
-        } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-        return null;
+
+        return connection;
     }
 }
