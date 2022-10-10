@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class UserDaoJDBCImpl {
+public class UserDaoJDBCImpl implements UserDao{
 
     private Connection connection = Util.getConnection();
 
@@ -27,7 +27,7 @@ public class UserDaoJDBCImpl {
 
     public void dropUsersTable() {
         try (Statement statement = connection.createStatement()) {
-            statement.executeUpdate("DROP TABLE Users");
+            statement.executeUpdate("DROP TABLE IF EXISTS Users");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
