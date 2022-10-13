@@ -1,8 +1,10 @@
 package jm.task.core.jdbc.util;
 
+import jm.task.core.jdbc.model.User;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 
-import java.lang.module.Configuration;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -13,8 +15,8 @@ public class Util {
     private static final String USERNAME = "root";
     private static final String PASSWORD = "root";
     private static final String URL = "jdbc:mysql://localhost:3306/Kata";
-    private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static final String DIALECT = "org.hibernate.dialect.MySQLDialect";
+    public static final String DRIVER = "com.mysql.cj.jdbc.Driver";
+    public static final String DIALECT = "org.hibernate.dialect.MySQLDialect";
     public static SessionFactory sessionFactory;
 
 
@@ -39,9 +41,15 @@ public class Util {
             properties.setProperty("hibernate.connection.password", PASSWORD);
             properties.setProperty("hibernate.dialect", DIALECT);
             Configuration configuration = new Configuration();
-
-
+            configuration.setProperties(properties);
+            configuration.addAnnotatedClass(User.class);
+            sessionFactory = (SessionFactory) configuration.buildSessionFactory();
+        } catch (Throwable e) {
+            e.printStackTrace();
         }
+    }
+    public static Session getSession() {
+        return sessionFactory.openSession();
     }
 
 
