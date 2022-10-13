@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @Entity
-@Table(name = "User")
+@Table(name = "User1")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

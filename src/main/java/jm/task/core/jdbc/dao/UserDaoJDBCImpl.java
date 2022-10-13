@@ -9,16 +9,16 @@ import java.util.List;
 
 public class UserDaoJDBCImpl implements UserDao {
 
-    public static final String CREATE_USER_TABLE = "CREATE TABLE IF NOT EXISTS User ( " +
+    public static final String CREATE_USER_TABLE = "CREATE TABLE IF NOT EXISTS User1 ( " +
             "id BIGINT PRIMARY KEY AUTO_INCREMENT, " +
             "name VARCHAR(30), " +
             "last_name VARCHAR(30), " +
             "age TINYINT UNSIGNED )";;
-    static final String DROP_USER_TABLE = "DROP TABLE IF EXISTS User";
-    static final String ADD_NEW_USER = "INSERT INTO user(name, last_name, age) VALUES (?, ?, ?)";
-    static final String REMOVE_USER_BY_ID = "DELETE FROM user WHERE id = ?";
-    static final String GET_ALL_USERS = "SELECT * FROM user";
-    static final String CLEAN_USERS_TABLE = "DELETE FROM user";
+    static final String DROP_USER_TABLE = "DROP TABLE IF EXISTS User1";
+    static final String ADD_NEW_USER = "INSERT INTO user1(name, last_name, age) VALUES (?, ?, ?)";
+    static final String REMOVE_USER_BY_ID = "DELETE FROM user1 WHERE id = ?";
+    static final String GET_ALL_USERS = "SELECT * FROM user1";
+    static final String CLEAN_USERS_TABLE = "DELETE FROM user1";
     private Connection connection = Util.getConnection();
 
     public void createUsersTable() {
