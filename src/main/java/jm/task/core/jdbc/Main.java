@@ -1,13 +1,8 @@
 package jm.task.core.jdbc;
 
-import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.service.UserServiceImpl;
-import javax.swing.text.TableView;
-import java.sql.Connection;
-import java.sql.DriverManager;
+
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.List;
 
 
 public class Main {
@@ -22,11 +17,8 @@ public class Main {
         userService.saveUser("hoty","f", Byte.parseByte("22"));
 
 
-        List<User> list = userService.getAllUsers();
-        for (User lis:list){
-            System.out.println(lis);
 
-        }
+        System.out.println(userService.getAllUsers());
         userService.cleanUsersTable();
         userService.dropUsersTable();
 
