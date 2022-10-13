@@ -1,12 +1,14 @@
 package jm.task.core.jdbc.model;
 
 import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Table
 public class User {
     @Id
+    @GeneratedValue
     private Long id;
 
     @Column
